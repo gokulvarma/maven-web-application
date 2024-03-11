@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven3.8.6'   
+    }
+
+    stages {
+        // CheckOutCode stage    
+        stage('CheckOutCode') {
+            steps {
+                git branch: 'development', credentialsId: 'f9d1eb76-6798-442e-81bd-ff5425f06a9e', url: 'https://github.com/gokulvarma/maven-web-application.git'
+            }
+        }
+
+        // RunTestandBuild stage
+        stage('RunTestandBuild') {
+            steps {
+                parallel(
+                    RunTests: {
+                        sh "mvn clean package"
+                    },
+                    Build: {
+                        sh "mvn package"
+                    }
+                )
+            }
+        }
+    } // stages closing
+} // pipeline closing
