@@ -9,7 +9,7 @@ stages{
     stage('CheckOutCode') {
       steps {
       sendSlackNotifications('STARTED')
-      git branch: 'development', credentialsId: 'f9d1eb76-6798-442e-81bd-ff5425f06a9e', url: 'https://github.com/gokulvarma/maven-web-application.git'
+      git branch: 'master', credentialsId: 'f9d1eb76-6798-442e-81bd-ff5425f06a9e', url: 'https://github.com/gokulvarma/maven-web-application.git'
        }
     }
 //Build Stage
